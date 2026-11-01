@@ -2,68 +2,65 @@ import { useState } from 'react'
 import { Dropdown } from './components/Dropdown'
 import './App.css'
 
-const records = [
-  { title: 'Night Ferry', artist: 'Lumen Lake', genre: 'Dream pop', price: 29, year: 2024, label: '#f6c344' },
-  { title: 'Concrete Bloom', artist: 'The Overpass', genre: 'Post-punk', price: 32, year: 2023, label: '#e8553d' },
-  { title: 'Slow Orbit', artist: 'Mara Quell', genre: 'Ambient', price: 27, year: 2025, label: '#7fc8a9' },
-  { title: 'Paper Saints', artist: 'Halfmoon Choir', genre: 'Folk', price: 25, year: 2022, label: '#c9b6f2' },
-  { title: 'Heat Index', artist: 'DJ Sorrel', genre: 'House', price: 34, year: 2025, label: '#ff8fb1' },
-  { title: 'Low Tide Hymns', artist: 'Ostrander', genre: 'Jazz', price: 31, year: 2021, label: '#8ec5ff' },
+const products = [
+  { name: 'Wool overshirt', type: 'Shirts', price: 89, added: 6, color: '#8a6f4e' },
+  { name: 'Linen trousers', type: 'Trousers', price: 64, added: 3, color: '#d9cdb4' },
+  { name: 'Knit sweater', type: 'Knitwear', price: 72, added: 5, color: '#4f6d5a' },
+  { name: 'Canvas jacket', type: 'Outerwear', price: 120, added: 1, color: '#2f3e56' },
+  { name: 'Cotton tee', type: 'Tops', price: 24, added: 4, color: '#e9e4da' },
+  { name: 'Denim jeans', type: 'Trousers', price: 79, added: 2, color: '#3b5a80' },
 ]
 
 const sorters = {
-  'Newest first': (a, b) => b.year - a.year,
+  'Newest first': (a, b) => a.added - b.added,
   'Price: low to high': (a, b) => a.price - b.price,
   'Price: high to low': (a, b) => b.price - a.price,
-  'Artist A–Z': (a, b) => a.artist.localeCompare(b.artist),
+  'Name A–Z': (a, b) => a.name.localeCompare(b.name),
 }
 
 function App() {
   const [sort, setSort] = useState('Newest first')
-  const sorted = [...records].sort(sorters[sort])
+  const sorted = [...products].sort(sorters[sort])
 
   return (
     <>
       <header className="site-header">
         <a className="logo" href="#">
-          <span className="logo-disc" aria-hidden="true" />
-          Side B
+          Store
         </a>
         <nav className="nav">
           <a href="#">New in</a>
-          <a href="#">Genres</a>
-          <a href="#">Pre-orders</a>
+          <a href="#">Women</a>
+          <a href="#">Men</a>
+          <a href="#">Sale</a>
         </nav>
-        <Dropdown label="Alex" align="right" items={['My orders', 'Wishlist', 'Account settings', 'Sign out']} />
+        <a className="cart" href="#">
+          Cart (0)
+        </a>
       </header>
 
       <main>
         <section className="hero">
-          <h1>Records worth flipping over.</h1>
-          <p>Small-batch pressings from independent labels, shipped flat in a proper mailer.</p>
+          <h1>Everyday clothes, made to last.</h1>
+          <p>Simple pieces in natural fabrics. Free returns within 30 days.</p>
         </section>
 
         <section className="shop">
           <div className="shop-bar">
-            <h2>New this week</h2>
+            <h2>New arrivals</h2>
             <Dropdown label={`Sort: ${sort}`} align="right" items={Object.keys(sorters)} onSelect={setSort} />
           </div>
 
           <ul className="grid">
-            {sorted.map((r) => (
-              <li key={r.title} className="card">
-                <div className="sleeve">
-                  <div className="vinyl" style={{ '--label': r.label }} />
-                </div>
+            {sorted.map((p) => (
+              <li key={p.name} className="card">
+                <div className="photo" style={{ '--swatch': p.color }} />
                 <div className="meta">
-                  <h3>{r.title}</h3>
-                  <p>{r.artist}</p>
-                  <p className="small">
-                    {r.genre}, {r.year}
-                  </p>
+                  <h3>{p.name}</h3>
+                  <p>{p.type}</p>
                 </div>
                 <div className="buy">
-                  <span>${r.price}</span>
+                  <span>${p.price}</span>
                   <button>Add to cart</button>
                 </div>
               </li>
@@ -72,7 +69,7 @@ function App() {
         </section>
       </main>
 
-      <footer className="site-footer">Side B Records, 214 Harbour St. Open Thursday to Sunday.</footer>
+      <footer className="site-footer">Free shipping on orders over $100.</footer>
     </>
   )
 }

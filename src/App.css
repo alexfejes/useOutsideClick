@@ -17,13 +17,6 @@
   letter-spacing: -0.02em;
 }
 
-.logo-disc {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: radial-gradient(circle, var(--blue) 0 28%, var(--ink) 30%);
-}
-
 .nav {
   display: flex;
   gap: 24px;
@@ -33,6 +26,11 @@
 .nav a {
   text-decoration: none;
   color: var(--muted);
+}
+
+.cart {
+  text-decoration: none;
+  font-weight: 600;
 }
 
 .nav a:hover {
@@ -93,32 +91,10 @@ main {
   gap: 14px;
 }
 
-.sleeve {
-  position: relative;
-  aspect-ratio: 1;
-  background: var(--ink);
-  overflow: hidden;
-}
-
-/* The record slides out of its sleeve on hover */
-.vinyl {
-  position: absolute;
-  inset: 8%;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle, var(--paper) 0 3%, var(--label) 3.5% 30%, transparent 31%),
-    repeating-radial-gradient(circle, #20242d 0 2px, #2b303b 2px 4px);
-  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
-.card:hover .vinyl {
-  transform: translateX(22%) rotate(40deg);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .vinyl {
-    transition: none;
-  }
+.photo {
+  aspect-ratio: 4 / 5;
+  border-radius: 4px;
+  background: linear-gradient(160deg, rgb(255 255 255 / 0.18), transparent 60%), var(--swatch);
 }
 
 .meta h3 {
